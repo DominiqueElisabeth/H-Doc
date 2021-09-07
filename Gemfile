@@ -14,12 +14,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
-
-# gem 'jquery-rails'
-# gem 'jquery-ui-rails'
-
-# gem 'mini_magick', '~> 4.8'
-# gem 'capistrano-rails', group: :development
+gem 'rails_admin', '~> 2.0'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
@@ -45,7 +40,6 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   # gem 'rails_best_practices'
-  gem 'dotenv-rails'
   gem 'letter_opener_web'
 end
 
