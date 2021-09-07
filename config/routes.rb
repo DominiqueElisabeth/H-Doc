@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   resources :appointments
   resources :posts
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
   root 'tops#index'
   post '/tops/guest_sign_in', to: 'tops#guest_sign_in'
   post '/tops/guest_admin_sign_in', to: 'tops#guest_admin_sign_in'

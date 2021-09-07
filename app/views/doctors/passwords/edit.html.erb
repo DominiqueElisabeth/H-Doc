@@ -1,7 +1,8 @@
-<h2><%= t('.change_your_password') %></h2>
+<h2><%= 'Change your password' %></h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+  <%= image_tag("logo.png", :alt => "HelloDoc Logo") %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
@@ -18,7 +19,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit t('.change_my_password') %>
+    <%= f.submit 'change my password' %>
   </div>
 <% end %>
 

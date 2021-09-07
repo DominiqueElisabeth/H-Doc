@@ -3,7 +3,7 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:edit, :update, :destroy]
 
   def index
-    @doctor = Doctor.sorted.pagination(params)
+    @doctor = Doctor.order(created_at: :asc).page(params[:page]).per(8)
   end
 
   def new
@@ -32,7 +32,7 @@ class DoctorsController < ApplicationController
   end
 
   def destroy
-    @staff.destroy
+    @doctor.destroy
     redirect_to doctors_path, notice:"Your profile has been destroyed"
   end
 
@@ -45,6 +45,4 @@ class DoctorsController < ApplicationController
   def doctor_params
     params.require(:doctor).permit(:name, :password, :password_confirmation, :admin)
   end
-end
-
 end

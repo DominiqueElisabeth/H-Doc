@@ -24,12 +24,12 @@ class Patients::SessionsController < Devise::SessionsController
 
   protected
 
-  # ログイン後に遷移するpathを設定
+
   def after_sign_in_path_for(resource)
     patient_path(resource)
   end
 
-  # ログアウト後に遷移するpathを設定
+
   def after_sign_out_path_for(resource)
     new_patient_session_path
   end

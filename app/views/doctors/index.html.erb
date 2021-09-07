@@ -1,24 +1,26 @@
-<h3><%= t('view.doctor') + t('view.index') %></h3>
+<h3><%= 'Doctor Lists' %></h3>
 
-<%= link_to t('view.new') + t('view.doctor'), new_doctor_path %>
+<%= link_to 'New Doctor', new_doctor_path %>
 
 
 
 <div class="d-flex flex-column justify-content-center patient_table_wrapper container">
   <div class="row mt-1">
-    <div class="col-4 patient_col col_top"><%= t('view.name') %></div>
-    <div class="col-4 patient_col col_top"><%= t('view.admin') %></div>
+    <div class="col-4 patient_col col_top"><%= 'List of Doctors and Admin' %></div>
+    <div class="col-4 patient_col col_top"><%= 'Admin/Not' %></div>
     <div class="col-4 patient_col col_top"><%= 'Button' %></div>
   </div>
-  <% @staffs.each do |staff| %>
+
+  <% @doctor.each do |doctor| %>
       <div class="row mt-1">
         <div class="col-4 patient_col"><%= doctor.name %></div>
         <div class="adminmark col-4 patient_col"><%= doctor.admin == true ? "○" : "" %></div>
+
         <div class="col-4 patient_col d-flex flex-row justify-content-center">
-          <button type="button" class="btn btn-outline-info mx-1"><%= link_to t('view.edit'), edit_doctor_path(doctor) %></button>
+          <button type="button" class="btn btn-outline-info mx-1"><%= link_to 'Edit', edit_doctor_path(doctor) %></button>
           <button type="button" class="btn btn-danger mx-1">
           <%= link_to t('view.destroy'), doctor, method: :delete,
-                data: { confirm: t('confirm.delete') } %></button>
+                data: { confirm: 'delete' } %></button>
         </div>
       </div>
     <% end %>

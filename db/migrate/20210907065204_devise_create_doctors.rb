@@ -4,7 +4,7 @@ class DeviseCreateDoctors < ActiveRecord::Migration[5.2]
   def change
     create_table :doctors do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      t.string :name,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.boolean "admin",            default: false
       ## Trackable
@@ -23,9 +23,9 @@ class DeviseCreateDoctors < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    add_index :doctors, :email,                unique: true
+    add_index :doctors, :name,                unique: true
     add_index :doctors, :unlock_token,         unique: true
     # add_index :doctors, :confirmation_token,   unique: true
-    
+
   end
 end

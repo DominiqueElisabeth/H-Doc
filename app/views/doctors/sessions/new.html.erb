@@ -1,6 +1,8 @@
-<h2><%= t('.sign_in') %></h2>
+<h2><%= 'Sign in'%></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= image_tag("logo.png", :alt => "HelloDoc Logo") %>
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
@@ -12,7 +14,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit 'sign in' %>
+    <%= f.submit 'Sign in' %>
   </div>
 <% end %>
 

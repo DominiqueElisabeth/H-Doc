@@ -8,11 +8,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @patient = @post.patient
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_patient.posts
   end
 
   # GET /posts/1/edit
@@ -64,6 +65,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:symptom, :age, :dob, :weight, :phone, :sex, :remark, :patient_id)
+      params.require(:post).permit(:symptom, :age, :dob, :weight, :phone, :sex, :remark )
     end
 end

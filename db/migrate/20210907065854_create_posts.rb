@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :phone
       t.string :sex
       t.text :remark
-      t.references :patient, foreign_key: true
+      t.belongs_to :patient, foreign_key: true
 
       t.timestamps
     end
