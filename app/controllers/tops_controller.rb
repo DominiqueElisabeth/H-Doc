@@ -4,19 +4,19 @@ class TopsController < ApplicationController
 
   def guest_sign_in
     patient = Patient.find_or_create_by!(email: 'guest@example.com') do |patient|
-      patient.name = "ゲスト"
+      patient.name = "patient"
       patient.password = SecureRandom.urlsafe_base64
     end
     sign_in patient
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to root_path, notice: 'You have logged in as a patient'
   end
 
   def guest_admin_sign_in
-    staff = Staff.find_or_create_by!(name: "ゲスト管理者") do |staff|
+    staff = Staff.find_or_create_by!(name: "doctor") do |staff|
       staff.admin = true
       staff.password = SecureRandom.urlsafe_base64
     end
     sign_in staff
-    redirect_to root_path, notice: 'ゲスト管理者としてログインしました。'
+    redirect_to root_path, notice: 'You have logged in as a doctor/admin'
   end
 end

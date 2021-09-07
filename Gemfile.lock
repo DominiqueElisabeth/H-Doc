@@ -89,8 +89,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.9.4)
-      devise (>= 4.7.1)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
@@ -108,8 +106,6 @@ GEM
     faker (2.18.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.1)
-    gimei (1.0.0)
-      romaji
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -216,8 +212,6 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
-    romaji (0.2.4)
-      rake (>= 0.8.0)
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.4)
@@ -315,12 +309,10 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
-  devise-i18n
   dotenv-rails
   enum_help
   factory_bot_rails
   faker
-  gimei
   jbuilder (~> 2.5)
   kaminari
   launchy
