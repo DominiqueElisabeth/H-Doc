@@ -1,0 +1,42 @@
+<%= form_with(model: @staff, local: true) do |f| %>
+
+  <% if @staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@staff.errors.count, "error") %>
+             prohibited this <%= @staff.name %> from being saved:
+      </h2>
+      <ul>
+        <% @staff.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, placeholder: "お名前(フルネーム)", autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('view.admin') %><br />
+    <%= f.check_box :admin, {}, "true", "false" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

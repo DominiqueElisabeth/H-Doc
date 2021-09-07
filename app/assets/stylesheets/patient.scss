@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+.introduce_area {
+  width: 70%;
+}
+
+.patient_show_edit_profile_button {
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.introduce_comment_area {
+  width: 70%;
+  border: dashed 3px rgb(145, 196, 238);
+  background-color: #fff;
+}
+
+.name_and_number_border {
+  width: 30%;
+  border-bottom: solid 3px rgb(77, 96, 207);
+}
+
+.patient_table_wrapper {
+  min-width: 400px;
+}
+
+.patient_col {
+  border-bottom: dashed 2px rgb(77, 96, 207);
+}
+
+.col_top {
+  border-top: dashed 2px rgb(77, 96, 207);
+}

@@ -1,0 +1,53 @@
+<h3><%= t('view.healthinterviews') + t('view.index') %></h3>
+
+<% if patient_signed_in? %>
+  <% if current_patient.health_interviews.present? %>
+    <% unless current_patient.health_interviews.last.guide_status.done? || current_patient.health_interviews.last.guide_status.noshow? %>
+      <th>あなたの番号は <%= current_patient.health_interviews.last.id %> です。</th>
+    <% else %>
+      <%= link_to t('view.new') + t('view.reception'), new_health_interview_path, id: "new_health_interview_btn" %>
+    <% end %>
+  <% end %>
+<% end %>
+<br><br>
+
+<div>
+  <%= form_with(model: @guide_status, method: :patch, format: 'json', id: 'health-interviews_index-form') do |f| %>
+    <div id="ajax_area">
+      <ul>
+        <div class="callinglist">
+          <th><%= t('view.calling') %></th>
+          <% if @health_interviews_1.present? %>
+            <div class="d-flex align-content-start flex-wrap">
+              <% @health_interviews_1.each.with_index do |hi, i| %>
+                <%= render partial: 'sortlist', locals: { hi: hi, i: i, f: f } %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+        <div class="initiallist">
+          <% if @health_interviews_0.present? %>
+            <div class="d-flex align-content-start flex-wrap">
+              <% @health_interviews_0.each.with_index do |hi, i| %>
+                <%= render partial: 'sortlist', locals: { hi: hi, i: i, f: f } %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <hr>
+        <div class="pendinglist">
+          <th><%= t('view.pending') %></th>
+          <% if @health_interviews_3.present? %>
+            <div class="d-flex align-content-start flex-wrap">
+              <% @health_interviews_3.each.with_index do |hi, i| %>
+                <%= render partial: 'sortlist', locals: { hi: hi, i: i, f: f } %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </ul>
+    </div>
+  <% end %>
+</div>
+

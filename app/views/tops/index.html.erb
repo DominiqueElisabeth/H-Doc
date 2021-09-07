@@ -1,0 +1,21 @@
+<h4><%= t('view.top') %></h4>
+
+<h1>メディカルパス(仮)<h1>
+  <h3>メディカルパス(仮)は医療従事者方達の為にできる事を模索する中、</h3>
+  <h3>患者目線で課題解決をすべく設計されたプロダクトです。</h3>
+
+<ul>
+  <h3>◆今回取り上げる課題◆</h3>
+  <h3>
+    <li>患者側の待ち時間</li>
+    <li>簡単な事務仕事の手間</li>
+  </h3>
+
+  <h3>◆解決法◆</h3>
+  <h3>
+    <li>基本的な手続き(受付/問診票/会計/処方箋等)をオンライン化することで簡略化</li>
+    <li>病院外で手続きが可能にすることで、患者の滞在時間を短縮させます</li>
+  </h3>
+</ul>
+<button type="button" class="btn btn-primary btn-sm"><%= link_to 'ゲストログイン(患者サイド)', tops_guest_sign_in_path, method: :post %></button>
+<button type="button" class="btn btn-secondary btn-sm"><%= link_to 'ゲストログイン(管理者スタッフサイド)', tops_guest_admin_sign_in_path, method: :post %></button>
