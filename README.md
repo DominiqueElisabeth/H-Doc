@@ -1,19 +1,9 @@
 # Hello Doctor
 Welcome to Hello Doctor, your friendly application design to get your first medical aid.									
 
-## Requirement Definition
+## Requirements
 
 The following steps are necessary to get the application up and running.
-
-### Functions
-```
-Create Patients
-Create Doctors
-Create Posts
-Post Screen Functions
-Login Functions
-Result Functions
-```
 
 ### Development Language
 ```
@@ -23,10 +13,7 @@ Rails 5.2.6
 ### Employment Term Technology
 ```
 Devise
-Favorite
 Ajax
-Cancancan
-Faker
 ```
 ### Technology outside the curriculum
 ```
@@ -34,14 +21,17 @@ reCAPTCHA
 ```
 ### Execution Procedure
 
-#### Enter these commands on the terminal
-```
-$ git clone https://github.com/DominiqueElisabeth/HelloDoc
-$ cd HelloDoc
-$ bundle install
-$ rails db:create && rails db:migrate
-$ rails s / rails s -b 0.0.0.0
-```
+#### Installation Steps
+
+1. Clone repo: `git clone git@github.com:DominiqueElisabeth/HelloDoc.git`
+2. Change into directory: `cd HelloDoc`
+3. Install gems: `bundle install`
+4. Install JavaScript packages: `yarn install`
+5. Create database: `rails db:create`
+6. Create tables: `rails db:migrate`
+7. Seed database: `rails db:seed`
+8. Start the server: `rails s`
+9. Visit http://localhost:3000/ and log in with any of the users defined in the [seeds file](https://github.com/DominiqueElisabeth/HelloDoc/blob/master/db/seeds.rb).
 
 ### Catalogue Design
 https://docs.google.com/spreadsheets/d/1hNswJdZqtyMHxdQ6lkTUgmXL_AOjElrFhKUuOzsMI9M/edit

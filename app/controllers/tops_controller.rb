@@ -12,11 +12,11 @@ class TopsController < ApplicationController
   end
 
   def guest_admin_sign_in
-    staff = Staff.find_or_create_by!(name: "doctor") do |staff|
-      staff.admin = true
-      staff.password = SecureRandom.urlsafe_base64
+    doctor = Doctor.find_or_create_by!(name: "doctor") do |staff|
+      doctor.admin = true
+      doctor.password = SecureRandom.urlsafe_base64
     end
-    sign_in staff
+    sign_in doctor
     redirect_to root_path, notice: 'You have logged in as a doctor/admin'
   end
 end

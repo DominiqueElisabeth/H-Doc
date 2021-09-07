@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Symptom:</strong>
+  <%= @post.symptom %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @post.age %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @post.dob %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @post.weight %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @post.phone %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @post.sex %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @post.remark %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @post.patient %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

@@ -1,49 +1,8 @@
 
 <div class="d-flex flex-column justify-content-center align-items-center">
-  <h2 class="name_and_number_border"><%= @patient.name %></h2>
+  <h2 class="name"><%= @patient.name %></h2>
 </div>
 
-<% if @patient.health_interviews.present? %>
-  <% unless @patient.health_interviews.last.guide_status.done? ||
-    @patient.health_interviews.last.guide_status.noshow? %>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="mt-3 name_and_number_border"><h1>No <%= @patient.health_interviews.last.id %> 番</h1></div>
-    </div>
-  <% end %>
-
-  <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-    <% if @patient.health_interviews.last.guide_status.initial? %>
-      <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left introduce_comment_area p-2">
-        <i>Thank you for your application. Please check the information status before you come.
-         If this is your first visit this month, please be sure to bring your insurance card with you.
-         If you are absent at the time of guidance, we will guide you to the next person.</i>
-      </div>
-    <% end %><br>
-
-    <% if @patient.health_interviews.last.guide_status.calling? %>
-      <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-        <i>Please show this screen and enter the examination room.</i>
-      </div>
-    <% end %><br>
-
-    <% if @patient.health_interviews.last.guide_status.pending? %>
-      <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-        <i>I called it, but I could not confirm it, so I will put it on hold.
-           If you come to the hospital, please contact the staff near you.
-           * Applications may be canceled depending on the congestion situation. Please note that.
-        </i>
-      </div>
-    <% end %><br>
-
-    <% if @patient.health_interviews.last.guide_status.noshow? %>
-    <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-      <i>We will cancel the call because we could not confirm it within a certain period of time.
-         If you continue to cancel without permission, you may not be able to use the service.
-      </i>
-    </div>
-    <% end %><br>
-  </div>
-<% end %>
 
 <div class="btn btn-primary patient_show_edit_profile_button">
   <%= link_to t('view.account') + t('view.edit'), edit_patient_registration_path(@patient), class: "text-white" %>

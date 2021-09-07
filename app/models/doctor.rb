@@ -1,10 +1,11 @@
-class Staff < ApplicationRecord
+class Doctor < ApplicationRecord
   # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, # :registerable,
          :timeoutable, :lockable, :trackable,
          :validatable
 
-  has_many :guide_statuses
+  has_many :appointments
 
   validates :name,     presence: true, length: {maximum: 20}
   validates :password, presence: true, length: { minimum: 6 }, on: :create

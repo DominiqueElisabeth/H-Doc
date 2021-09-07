@@ -17,9 +17,9 @@
     <div class="d-flex flex-row">
       <div class="d-flex flex-row bd-highlight mb-3">
         <div class="p-2 bd-highlight"><li><big><i><%= link_to 'Hello Doctor', root_path %></i></big></li></div>
-        <div class="p-2 bd-highlight"><li><%= link_to t('view.waiting'), health_interviews_path, target: :_blank, rel: "noopener noreferrer" %></li></div>
+        <div class="p-2 bd-highlight"><li><%= link_to t('view.waiting'), posts_path, target: :_blank, rel: "noopener noreferrer" %></li></div>
       </div>
-      <% if patient_signed_in? || staff_signed_in? %>
+      <% if patient_signed_in? || doctor_signed_in? %>
         <% if patient_signed_in? %>
           <div class="d-flex flex-row bd-highlight mb-3">
             <div class="p-2 bd-highlight"><li><%= link_to t('view.my_page'), patient_path(current_patient.id) %></li></div>
@@ -28,14 +28,16 @@
             <div class="p-2 bd-highlight"><li><%= link_to t('view.sign_out'), destroy_patient_session_path, method: :delete %></li></div>
           </div>
         <% else %>
-          <% if current_staff.admin? %>
+          <% if current_doctor.admin? %>
             <div class="d-flex flex-row bd-highlight mb-3">
               <div class="p-2 bd-highlight"><li><%= link_to t('view.patient') + t('view.index'), patients_path %></li></div>
-              <div class="p-2 bd-highlight"><li><%= link_to t('view.staff') + t('view.index'), staffs_path %></li></div>
+              <div class="p-2 bd-highlight"><li><%= link_to t('view.doctor') + t('view.index'), doctors_path %></li></div>
+              <div class="p-2 bd-highlight"><li><%= link_to t('view.appointment') + t('view.index'), appointments_path %></li></div>
+              <div class="p-2 bd-highlight"><li><%= link_to t('view.notes') + t('view.index'), notes_path %></li></div>
             </div>
           <% end %>
             <div class="d-flex flex-row-reverse bd-highlight">
-              <div class="p-2 bd-highlight"><li><%= link_to t('view.sign_out'), destroy_staff_session_path, method: :delete %></li></div>
+              <div class="p-2 bd-highlight"><li><%= link_to t('view.sign_out'), destroy_doctor_session_path, method: :delete %></li></div>
             </div>
         <% end %>
       <% else %>

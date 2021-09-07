@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_100007) do
+ActiveRecord::Schema.define(version: 2021_09_07_065854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "doctors", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.boolean "admin", default: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_doctors_on_email", unique: true
+    t.index ["unlock_token"], name: "index_doctors_on_unlock_token", unique: true
+  end
 
   create_table "guide_statuses", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -57,6 +75,20 @@ ActiveRecord::Schema.define(version: 2021_06_11_100007) do
     t.index ["unlock_token"], name: "index_patients_on_unlock_token", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.text "symptom"
+    t.integer "age"
+    t.date "dob"
+    t.integer "weight"
+    t.string "phone"
+    t.string "sex"
+    t.text "remark"
+    t.bigint "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_posts_on_patient_id"
+  end
+
   create_table "staffs", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -78,4 +110,5 @@ ActiveRecord::Schema.define(version: 2021_06_11_100007) do
   add_foreign_key "guide_statuses", "health_interviews"
   add_foreign_key "guide_statuses", "staffs"
   add_foreign_key "health_interviews", "patients"
+  add_foreign_key "posts", "patients"
 end

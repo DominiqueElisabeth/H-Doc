@@ -11,7 +11,7 @@ class PatientsController < ApplicationController
   def update
     @patient = current_patient
     if @patient.update(patient_params)
-      redirect_to patient_path, notice: "アカウントを更新しました！"
+      redirect_to patient_path, notice: "Your account has been updated！"
       # I18n.t('views.messages.update_profile')
     else
       render 'edit'
@@ -30,11 +30,11 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient.destroy
-    redirect_to patients_path, notice:"患者情報を削除しました！"
+    redirect_to patients_path, notice:"Your account has been destroyed！"
   end
 
   def sign_in_required
-    redirect_to new_patient_session_url unless patient_signed_in? || (staff_signed_in? && current_staff.admin)
+    redirect_to new_patient_session_url unless patient_signed_in? || (doctor_signed_in? && current_doctor.admin)
   end
 
   # def current_patient_eq_patient

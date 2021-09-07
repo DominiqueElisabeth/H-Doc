@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+  devise_for :doctors
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'tops#index'
   post '/tops/guest_sign_in', to: 'tops#guest_sign_in'
