@@ -1,44 +1,44 @@
 
 <div class="d-flex flex-column justify-content-center align-items-center">
-  <h2 class="name_and_number_border"><%= @patient.name %>様</h2>
+  <h2 class="name_and_number_border"><%= @patient.name %></h2>
 </div>
 
 <% if @patient.health_interviews.present? %>
   <% unless @patient.health_interviews.last.guide_status.done? ||
     @patient.health_interviews.last.guide_status.noshow? %>
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="mt-3 name_and_number_border"><h1>番号 <%= @patient.health_interviews.last.id %> 番</h1></div>
+      <div class="mt-3 name_and_number_border"><h1>No <%= @patient.health_interviews.last.id %> 番</h1></div>
     </div>
   <% end %>
 
   <div class="d-flex flex-column justify-content-center align-items-center mt-4">
     <% if @patient.health_interviews.last.guide_status.initial? %>
       <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left introduce_comment_area p-2">
-        <i>お申し込み頂きありがとうございます。ご案内状況をご確認の上お越しください。
-        今月初めてのご来院の場合は保険証をお忘れなきようお持ちください。
-        ご案内時にご不在の場合、次の方をご案内させて頂きます。</i>
+        <i>Thank you for your application. Please check the information status before you come.
+         If this is your first visit this month, please be sure to bring your insurance card with you.
+         If you are absent at the time of guidance, we will guide you to the next person.</i>
       </div>
     <% end %><br>
 
     <% if @patient.health_interviews.last.guide_status.calling? %>
       <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-        <i>こちらの画面をご提示の上、診察室へお入り下さい。</i>
+        <i>Please show this screen and enter the examination room.</i>
       </div>
     <% end %><br>
 
     <% if @patient.health_interviews.last.guide_status.pending? %>
       <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-        <i>お呼び出しさせて頂きましたが確認が取れなかった為、保留扱いとさせて頂いております。
-          ご来院されましたらお近くのスタッフまでお声掛け下さい。
-          ※混雑状況によってはお申し込みを取り消しとさせて頂く場合がございます。予めご了承下さい。
+        <i>I called it, but I could not confirm it, so I will put it on hold.
+           If you come to the hospital, please contact the staff near you.
+           * Applications may be canceled depending on the congestion situation. Please note that.
         </i>
       </div>
     <% end %><br>
 
     <% if @patient.health_interviews.last.guide_status.noshow? %>
     <div class="introduce_area d-flex flex-row justify-content-center align-items-center text-left alert text-left">
-      <i>お呼び出しから一定時間内に確認が取れませんでしたのでキャンセルとさせて頂きます。
-        無断キャンセルが続きますとサービスがご利用頂けなくなる場合がございます。
+      <i>We will cancel the call because we could not confirm it within a certain period of time.
+         If you continue to cancel without permission, you may not be able to use the service.
       </i>
     </div>
     <% end %><br>

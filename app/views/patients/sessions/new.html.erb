@@ -1,14 +1,15 @@
 <h3><%= t('.sign_in') %></h3>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= image_tag("logo.png", :alt => "HelloDoc Logo") %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, placeholder: "お名前", autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, placeholder: "パスワード", autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
