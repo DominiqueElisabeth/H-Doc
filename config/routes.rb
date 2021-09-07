@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :appointments
   resources :posts
-  devise_for :doctors
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   root 'tops#index'
   post '/tops/guest_sign_in', to: 'tops#guest_sign_in'
   post '/tops/guest_admin_sign_in', to: 'tops#guest_admin_sign_in'
@@ -13,15 +15,15 @@ Rails.application.routes.draw do
   }
   resources :patients
 
-  devise_for :staffs, controllers: {
-    sessions:      'staffs/sessions',
-    passwords:     'staffs/passwords',
-    registrations: 'staffs/registrations'
+  devise_for :doctors, controllers: {
+    sessions:      'doctors/sessions',
+    passwords:     'doctors/passwords',
+    registrations: 'doctors/registrations'
   }
-  resources :staffs, except: [:show]
+  resources :doctors, except: [:show]
 
-  resources :health_interviews do
-    resources :guide_statuses, only: :update, controller: 'health_interviews/guide_statuses'
+  resources :posts do
+    resources :appointments, only: :update, controller: 'posts/appointments'
   end
 
   if Rails.env.development?
