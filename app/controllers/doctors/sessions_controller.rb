@@ -5,28 +5,10 @@ class Doctors::SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token, only: :create
   before_action :patient_not
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
-
-  # POST /resource/sign_in
-  # def create
-  #   render 'new' unless staff_signed_in?
-  #   super
-  #    redirect_to health_interviews_path
-  # end
-
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  #   redirect_to new_staff_session_url
-  # end
-
   protected
 
   def after_sign_in_path_for(resource)
-    # if current_staff.admin?
+    # if current_doctor.admin?
     #   patients_path
     # else
       posts_path
