@@ -2,7 +2,7 @@ class PatientsController < ApplicationController
   before_action :authenticate_patient!, except: [:new, :create, :index]
   before_action :admin_required, only: [:index]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
-  
+
   # before_action :current_patient_eq_patient, only: [:show, :edit, :update, :destroy]
 
   def edit

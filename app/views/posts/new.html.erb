@@ -1,5 +1,41 @@
-<h1>New Post</h1>
+<div class="form-container">
+  <h1>Add Post</h1>
+  <hr />
+  <%= form_with(model: @post, local: true, class: "ui form") do |form| %>
 
-<%= render 'form', post: @post %>
+<div class="field">
+  <%= form.label :symptom %>
+  <%= form.text_area :symptom %>
+</div>
+
+<div class="field">
+  <%= form.label :dob %>
+  <%= form.date_field :dob, required: true, placeholder: "D.O.B." %>
+</div>
+
+<div class="field">
+  <%= form.label :weight %>
+  <%= form.number_field :weight %>
+</div>
+
+<div class="field">
+  <%= form.label :phone %>
+  <%= form.text_field :phone %>
+</div>
+
+<div class="field">
+  <%= form.label :sex %>
+  <%= form.select :sex, ["Male", "Female"], required: true %>
+</div>
+
+<div class="field">
+  <%= form.label :remark %>
+  <%= form.text_area :remark %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+<% end %>
 
 <%= link_to 'Back', posts_path %>

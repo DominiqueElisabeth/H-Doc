@@ -12,16 +12,14 @@ Rails.application.routes.draw do
     registrations: 'patients/registrations'
   }
   resources :patients
-
+  
   devise_for :doctors, controllers: {
     sessions:      'doctors/sessions',
     passwords:     'doctors/passwords',
     registrations: 'doctors/registrations'
   }
-  resources :doctors, except: [:show]
-
-  resources :posts do
-    resources :appointments, only: :update, controller: 'posts/appointments'
+  resources :doctors do
+    resources :appointments, controller: 'appointments'
   end
 
   if Rails.env.development?

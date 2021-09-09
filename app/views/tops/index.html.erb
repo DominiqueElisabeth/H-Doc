@@ -1,21 +1,21 @@
-<h1>Why Hello Doctor<h1>
+<h1>Hello Doctor<h1>
 
   <h3>Hello Doctor is a friendly healthcare application for doctors and patients</h3>
   <h3>This application is designed as a first medical aids</h3>
 
 <ul>
   <h3>Issue</h3>
-  <h3>
+  <h4>
     <li>Time consuming going to the hospital</li>
 
-  </h3>
+  </h4>
 
   <h3>Solution</h3>
-  <h3>
-    <li>Basic online procedure like (reception, questionnaire, and prescription.</li>
+  <h4>
+    <li>Basic online procedure like reception, questionnaire, and prescription.</li>
     <li>easy to use and require less time</li>
-  </h3>
+  </h4>
 </ul>
 
 <button type="button" class="btn btn-primary btn-sm"><%= link_to 'Login as a patient', tops_guest_sign_in_path, method: :post %></button>
-<button type="button" class="btn btn-secondary btn-sm"><%= link_to 'Login as a doctor/admin', tops_guest_admin_sign_in_path, method: :post %></button>
+<button type="button" class="btn btn-secondary btn-sm"><%= link_to 'Login as an admin', tops_guest_admin_sign_in_path, method: :post %></button>

@@ -6,7 +6,9 @@ class Patient < ApplicationRecord
         #  :omniauthable, omniauth_providers: [:google_oauth2]
         #  :trackable
 
-  has_many :posts, dependent: :destroy
+  has_many :posts
+  has_many :appointments, dependent: :destroy
+  has_many :doctors, through: :appointments
 
   validates :name,     presence: true, length: {maximum: 20}
   validates :email,    presence: true, length: {maximum: 255},

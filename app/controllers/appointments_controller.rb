@@ -1,71 +1,50 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[ show edit update destroy ]
   before_action :admin_required
-  before_action :doctor_required, only: %i[ show edit destroy ]
+  before_action :set_doctor
+  before_action :set_patients, only: [:new, :create]
 
-  # GET /appointments or /appointments.json
-  def index
-    @appointments = Appointment.all
+def index
+  @appointments = @doctor.appointments.order(:date, :time)
+end
+
+def show
+  @patient = @appointment.patient.find(params[:id])
+  @doctor = @appointment.doctor.find(params[:doctor_id])
+end
+
+def new
+  @appointment = @doctor.appointments.new
+end
+
+def create
+  @appointment = @doctor.appointments.new(appointment_params)
+  if @appointment.save
+    redirect_to doctor_appointments_path
+  else
+    render :new
+  end
+end
+
+def destroy
+  @doctor.appointments.find(params[:id]).destroy
+  redirect_to doctor_appointments_path
+end
+
+private
+  def set_doctor
+    @doctor = Doctor.find(params[:doctor_id])
   end
 
-  # GET /appointments/1 or /appointments/1.json
-  def show
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
   end
 
-  # GET /appointments/new
-  def new
-    @appointment = Appointment.new
+  def set_patients
+    @patients = (Patient.all - @doctor.patients)
   end
 
-  # GET /appointments/1/edit
-  def edit
+  def appointment_params
+    params.require(:appointment).permit(:patient_id, :date, :time)
   end
-
-  # POST /appointments or /appointments.json
-  def create
-    @appointment = Appointment.new(appointment_params)
-
-    respond_to do |format|
-      if @appointment.save
-        format.html { redirect_to @appointment, notice: "Appointment was successfully created." }
-        format.json { render :show, status: :created, location: @appointment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /appointments/1 or /appointments/1.json
-  def update
-    respond_to do |format|
-      if @appointment.update(appointment_params)
-        format.html { redirect_to @appointment, notice: "Appointment was successfully updated." }
-        format.json { render :show, status: :ok, location: @appointment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /appointments/1 or /appointments/1.json
-  def destroy
-    @appointment.destroy
-    respond_to do |format|
-      format.html { redirect_to appointments_url, notice: "Appointment was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_appointment
-      @appointment = Appointment.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def appointment_params
-      params.require(:appointment).permit(:patient_id, :doctor_id, :doctor, :patient, :date, :time)
-    end
 end

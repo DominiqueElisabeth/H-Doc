@@ -1,41 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Symptom:</strong>
-  <%= @post.symptom %>
-</p>
-
-<p>
-  <strong>Age:</strong>
-  <%= @post.age %>
-</p>
-
-<p>
-  <strong>Dob:</strong>
-  <%= @post.dob %>
-</p>
-
-<p>
-  <strong>Weight:</strong>
-  <%= @post.weight %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @post.phone %>
-</p>
-
-<p>
-  <strong>Sex:</strong>
-  <%= @post.sex %>
-</p>
-
-<p>
-  <strong>Remark:</strong>
-  <%= @post.remark %>
-</p>
+<h1><%= @post.patient.name%></h1>
+<h2 class="ui center aligned blue header">Patient Information</h2>
+<table class="ui definition table user-info selectable">
+  <tr>
+      <td>Symptom:</td>
+      <td><%= @post.symptom %></td>
+  </tr>
+  <tr>
+      <td>Age:</td>
+      <td><%= @post.age %></td>
+  </tr>
+  <tr>
+      <td>Date of Birth:</td>
+      <td><%= @post.dob.strftime('%m / %d / %Y') %></td>
+  </tr>
+  <tr>
+      <td>Sex:</td>
+      <td><%= @post.sex %></td>
+  </tr>
+  <tr>
+      <td>Phone:</td>
+      <td><%= @post.phone %></td>
+  </tr>
+  <tr>
+      <td>Remark:</td>
+      <td><%= @post.remark %></td>
+  </tr>
+  <%= link_to 'Edit', edit_post_path(@post), class:"ui button red inverted" %> |
+  <%= link_to 'Back', posts_path , class:"ui button red inverted"%>
+</table>
+<br />
+<br />
 
 
+<h2 class="ui center aligned blue header"><%= @patient.name == 's' ? "'  Scheduled Appointments" : "\'s Scheduled Appointments"%></h2>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+    <table class="ui table striped selectable">
+        <thead>
+            <tr>
+                <th>Doctor Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @appointments.each_with_index do |appt,i| %>
+                <tr>
+                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button basic" %></td>
+                    <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
+                    <td><%= appt.time.strftime("%l:%M %p") %></td>
+                    <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>

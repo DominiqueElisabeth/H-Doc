@@ -6,14 +6,14 @@
 <div class="d-flex flex-column justify-content-center patient_table_wrapper container">
   <div class="row mt-1">
     <div class="col-4 patient_col col_top"><%= 'Name' %></div>
-    <div class="col-4 patient_col col_top"><%= 'Size' %></div>
+    <div class="col-4 patient_col col_top"><%= 'Post' %></div>
     <div class="col-4 patient_col col_top"><%= 'button' %></div>
   </div>
   <% @patients.each do |patient| %>
     <% if patient.posts.present? %>
       <div class="row mt-2">
-        <div class="col-4 patient_col"><%= link_to patient.name, post_path(patient.posts.last.id) %></div>
-        <div class="col-4 patient_col"><%= patient.posts.size %></div>
+        <div class="col-4 patient_col"><%= link_to patient.name, patient_path %></div>
+        <div class="col-4 patient_col"><%= link_to patient.post_id, post_path %></div>
         <div class="col-4 patient_col"><button type="button" class="btn btn-danger"><%= link_to 'Delete', patient, method: :delete,
                   data: { confirm: 'delete' } %></button></div>
       </div>
