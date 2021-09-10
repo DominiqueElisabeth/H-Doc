@@ -1,50 +1,16 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[ show edit update destroy ]
-  before_action :admin_required
-  before_action :set_doctor
-  before_action :set_patients, only: [:new, :create]
 
 def index
-  @appointments = @doctor.appointments.order(:date, :time)
-end
-
-def show
-  @patient = @appointment.patient.find(params[:id])
-  @doctor = @appointment.doctor.find(params[:doctor_id])
-end
-
-def new
-  @appointment = @doctor.appointments.new
-end
-
-def create
-  @appointment = @doctor.appointments.new(appointment_params)
-  if @appointment.save
-    redirect_to doctor_appointments_path
-  else
-    render :new
-  end
-end
-
-def destroy
-  @doctor.appointments.find(params[:id]).destroy
-  redirect_to doctor_appointments_path
-end
-
-private
-  def set_doctor
-    @doctor = Doctor.find(params[:doctor_id])
+    @appointments = current_doctor.appointments
   end
 
-  def set_appointment
-    @appointment = Appointment.find(params[:id])
+  def create
+    appointment = current_doctor.appointments.create(post_id: params[:post_id])
+  redirect_to posts_path, notice: "#{appointment.post.patient.name}'s post has been added to appointments"
   end
 
-  def set_patients
-    @patients = (Patient.all - @doctor.patients)
-  end
-
-  def appointment_params
-    params.require(:appointment).permit(:patient_id, :date, :time)
+  def destroy
+    appointment = current_doctor.appointments.find_by(id: params[:id]).destroy
+    redirect_to posts_path, notice: "#{appointment.post.patient.name}'s post has been removed from appointments"
   end
 end

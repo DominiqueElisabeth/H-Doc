@@ -22,6 +22,9 @@ class DoctorsController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   def update
     if @doctor.update(doctor_params)
       redirect_to doctors_path, notice: "Your profile has been updated"

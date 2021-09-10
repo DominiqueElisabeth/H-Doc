@@ -3,7 +3,11 @@
   <h2 class="name"><%= @doctor.name %></h2>
 </div>
 
-
-<div class="btn btn-primary patient_show_edit_profile_button">
+<% if logged_in? %>
+<div class="btn btn-primary doctor_show_edit_profile_button">
   <%= link_to 'Edit your account', edit_doctor_registration_path(@doctor), class: "text-white" %>
+</div>
+
+<div class="btn btn-primary doctor_show_appointment_list_button">
+  <%= link_to 'Appointments List', appointment_path, class: "text-white" %>
 </div>

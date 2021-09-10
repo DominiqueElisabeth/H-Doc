@@ -1,14 +1,15 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+   # protect_from_forgery with: :exception
+    # before_action :configure_permitted_parameters, if: :devise_controller?
 
   # helper_method :current_patient
 
   def admin_required
-    redirect_to posts_path unless doctor_signed_in? && current_doctor.admin?
+    redirect_to appointments_path unless doctor_signed_in? && current_doctor.admin?
   end
 
-  def post_required
-    redirect_to posts_path unless doctor_signed_in?
+  def doctor_required
+    redirect_to appointments_path unless doctor_signed_in?
   end
 
   def patient_required

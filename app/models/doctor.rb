@@ -5,7 +5,7 @@ class Doctor < ApplicationRecord
          :timeoutable, :lockable, :trackable,
          :validatable
 
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
 
   validates :name,     presence: true, length: {maximum: 20}
   validates :password, presence: true, length: { minimum: 6 }, on: :create

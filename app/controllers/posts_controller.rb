@@ -1,15 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_patient!
-  before_action :admin_required, only: [:index]
+
 
   # GET /posts or /posts.json
   def index
-    @posts = current_patient.posts.all
+    @posts = Post.all
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @appointment = current_doctor.appointments.find_by(post_id: @post.id)
   end
 
   # GET /posts/new
@@ -23,15 +23,16 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
-        if @post.save
-          @post.patient_id = @current_patient.id
-          flash[:success] = "Post was successfully created."
-          redirect_to posts_path
-        else
-          render :new
+      @post = Post.new(post_params)
+      @post.patient_id = current_patient.id
+          if @post.save
+            age = Date.today.year - @post.dob.year
+            @post.update(age: age)
+            redirect_to posts_path,  notice: 'Post was successfully created.'
+          else
+            render :new
+          end
         end
-      end
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update

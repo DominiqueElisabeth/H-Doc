@@ -1,5 +1,5 @@
-<span class="doctor-show-header"><h1>Healthcare Post List</h1></span>
-<%= link_to 'Add Post', new_post_path, class:"ui button blue inverted"%>
+<span class="doctor-show-header"><h1><%= @patient %>Healthcare Post List</h1></span>
+
 <br />
 <br />
 <hr />
@@ -11,6 +11,7 @@
     <th class="center aligned">Age</th>
     <th class="center aligned">Date of Birth</th>
     <th class="center aligned">Sex</th>
+    <th class="center aligned">Weight</th>
     <th class="center aligned">Phone</th>
     <th class="center aligned">Remark</th>
     <th class="center aligned">Remove</th>
@@ -19,15 +20,14 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= link_to post.patient.name, patient_path(patient), class: "ui basic button" %></td>
+        <td><%= link_to post.patient.name, class: "ui basic button" %></td>
         <td><%= post.symptom %></td>
         <td><%= post.age %></td>
         <td><%= post.dob.strftime('%m/%d/%Y') %></td>
         <td><%= post.sex == "Male" ? "M" : "F" %></td>
+        <td><%= post.weight %></td>
         <td><%= post.phone %></td>
         <td><%= post.remark %></td>
-
-        <td><%= link_to 'Edit', edit_post_path(post), class: "ui basic button"  %></td>
         <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"ui button red inverted" %></td>
       </tr>
     <% end %>
