@@ -3,8 +3,8 @@ class TopsController < ApplicationController
   end
 
   def guest_sign_in
-    patient = Patient.find_or_create_by!(email: 'guest@example.com') do |patient|
-      patient.name = "patient"
+    patient = Patient.find_or_create_by!(email: 'test@example.com') do |patient|
+      patient.name = "test"
       patient.password = SecureRandom.urlsafe_base64
     end
     sign_in patient

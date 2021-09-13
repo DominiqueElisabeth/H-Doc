@@ -39,7 +39,7 @@
 <br />
 
 <h2 class="ui center aligned blue header"><%= @post.patient.name%> <%= @post.patient.name[-1] == 's' ? "'  Scheduled Appointments" : "\'s Scheduled Appointments"%></h2>
-
+<%= link_to 'Add Appointment', new_appointment_path, class:"ui button blue inverted"%>
     <table class="ui table striped selectable">
         <thead>
             <tr>
@@ -60,4 +60,34 @@
             <% end %>
         </tbody>
     </table>
-<%= link_to 'Add Appointment', new_appointment_path, class:"ui button blue inverted"%>
+
+
+<div class="notes-container">
+    <h2 class="ui center aligned blue header"><%= @post.patient.name%> <%= @post.patient.name[-1] == 's' ? "'  Doctor Notes" : "\'s Doctor Notes"%></h2>
+    <p><%= @comments.length <= 0 ? "No post notes found": ""%></p>
+
+    <% @comments.each do |comment|  %>
+        <div class="comment">
+            <p class="message-body"><%= comment.content %></p>
+            <div class="poster-info">
+                <%= comment.post.patient.name %>
+                <br />
+                <%= comment.created_at.strftime("%b %d, %Y") %>
+                <br />
+                <%= comment.created_at.in_time_zone("Asia/Tokyo").strftime("%l:%M %p") %>
+            </div>
+            <div class="note-actions">
+                <%= link_to edit_post_comment_path(comment.post_id, comment), :edit => 'go' do %>
+                    <i class="edit outline icon"></i>
+                <% end %>
+                <%= button_to post_comment_path(comment.post, comment), method: :delete do %>
+                    <i class="trash alternate icon trash"></i>
+                <% end %>
+
+            </div>
+
+        </div>
+    <% end %>
+    <%= link_to "Add Result", new_post_comment_path(@post), class:"ui button blue" %>
+
+</div>

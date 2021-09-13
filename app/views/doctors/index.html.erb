@@ -11,7 +11,7 @@
 
   <% @doctor.each do |doctor| %>
       <div class="row mt-1">
-        <div class="col-4 patient_col"><%= doctor.name %></div>
+        <div class="col-4 patient_col"><%= link_to doctor.name, doctor_appointments_path(doctor), class: "ui basic button" %></div>
         <div class="adminmark col-4 patient_col"><%= doctor.admin == true ? "○" : "" %></div>
 
         <div class="col-4 patient_col d-flex flex-row justify-content-center">

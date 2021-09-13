@@ -1,6 +1,7 @@
-<span class="doctor-show-header"><h1>doctor Appointments</h1></span>
+<span class="doctor-show-header"><h1><%= @doctor.name %> Appointments</h1></span>
 
-<%= link_to 'New Appointment', new_appointment_path, class:"ui button blue inverted"%>
+<%= link_to 'Add Appointment', new_doctor_appointment_path(@doctor), class:"ui button blue inverted" %>
+<%= link_to 'Post Lists', posts_path(@post), class:"ui button blue inverted" %>
 
 <br />
 <br />
@@ -24,9 +25,9 @@
         <td><%= appt.post.symptom %></td>
         <td><%= appt.post.age %></td>
         <td><%= appt.post.dob %></td>
-        <td><%= appt.post.strftime('%a, %b %d, %Y') %></td>
+        <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
         <td><%= appt.time.strftime("%l:%M %p")  %></td>
-        <td><%= button_to 'Cancel', appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+        <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :appointments
-  resources :posts
+  resources :comments
+  resources :posts do
+   resources :comments
+ end
 
   root 'tops#index'
   post '/tops/guest_sign_in', to: 'tops#guest_sign_in'

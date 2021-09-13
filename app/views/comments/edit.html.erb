@@ -1,0 +1,8 @@
+<h1>Edit Note For <%= @post.patient.name %></h1>
+<%= form_with(model: [@post,@comment], local: true, class: "ui form") do |f| %>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content, required: true, placeholder: "Edit the results", rows: 10%>
+  </div>
+  <%= f.submit nil, class: "ui blue button" %>
+<% end %>

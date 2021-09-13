@@ -6,7 +6,9 @@ class Doctor < ApplicationRecord
          :validatable
 
   has_many :appointments, dependent: :destroy
+  has_many :comments, through: :posts
   has_many :posts, through: :appointments
+  has_many :comments
 
   validates :name,     presence: true, length: {maximum: 20}
   validates :password, presence: true, length: { minimum: 6 }, on: :create
