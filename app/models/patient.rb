@@ -7,7 +7,7 @@ class Patient < ApplicationRecord
         #  :trackable
 
   has_many :posts
-  has_many :appointments, dependent: :destroy
+  has_many :appointments
   has_many :doctors, through: :appointments
 
   validates :name,     presence: true, length: {maximum: 20}

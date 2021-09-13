@@ -2,6 +2,10 @@
 <h2 class="ui center aligned blue header">Patient Information</h2>
 <table class="ui definition table user-info selectable">
   <tr>
+      <td>Name:</td>
+      <td><%= @post.patient.name %></td>
+  </tr>
+  <tr>
       <td>Symptom:</td>
       <td><%= @post.symptom %></td>
   </tr>
@@ -30,13 +34,30 @@
       <td><%= @post.remark %></td>
   </tr>
 
-<% unless @post_id == current_doctor.id %>
-<% if @appointment.present? %>
-  <%= link_to 'Not an appointment', appointment_path(id: @appointment.id), method: :delete, class:'btn btn-danger' %>
-<% else %>
-  <%= link_to 'Add as an appointment', appointments_path(post_id: @post.id), method: :post, class:'btn btn-primary'%>
-<% end %>
-<% end %>
-
-<%= link_to 'Back', posts_path , class:"ui button red inverted"%>
 </table>
+<br />
+<br />
+
+<h2 class="ui center aligned blue header"><%= @post.patient.name%> <%= @post.patient.name[-1] == 's' ? "'  Scheduled Appointments" : "\'s Scheduled Appointments"%></h2>
+
+    <table class="ui table striped selectable">
+        <thead>
+            <tr>
+                <th>Doctor Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @appointments.each_with_index do |appt,i| %>
+                <tr>
+                    <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button basic" %></td>
+                    <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
+                    <td><%= appt.time.strftime("%l:%M %p") %></td>
+                    <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<%= link_to 'Add Appointment', new_appointment_path, class:"ui button blue inverted"%>

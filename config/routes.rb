@@ -11,16 +11,18 @@ Rails.application.routes.draw do
     passwords:     'patients/passwords',
     registrations: 'patients/registrations'
   }
-  resources :patients
-  
+  resources :patients do
+  resources :posts
+end
+
   devise_for :doctors, controllers: {
     sessions:      'doctors/sessions',
     passwords:     'doctors/passwords',
     registrations: 'doctors/registrations'
   }
   resources :doctors do
-    resources :appointments, controller: 'appointments'
-  end
+      resources :appointments
+    end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

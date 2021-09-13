@@ -1,6 +1,7 @@
-<span class="doctor-show-header"><h1><%= @doctor %> Appointments</h1></span>
+<span class="doctor-show-header"><h1>doctor Appointments</h1></span>
 
-<%= link_to 'Back', posts_path, class:"ui button blue inverted" %>
+<%= link_to 'New Appointment', new_appointment_path, class:"ui button blue inverted"%>
+
 <br />
 <br />
 <hr />
@@ -8,26 +9,24 @@
 
 <table class="ui celled table">
   <thead>
-    <th>Patient Name</th>
-    <th>Patient Symptoms</th>
-    <th>Patient Age</th>
-    <th>Patient Date of Birth</th>
-    <th>Patient Sex</th>
-    <th>Patient Phone</th>
-    <th>Patient Remarks</th>
-
+    <th>Name</th>
+    <th>Symptoms</th>
+    <th>Age</th>
+    <th>Date of Birth</th>
+    <th>Appointment Date</th>
+    <th>Appointment Time</th>
+    <th>Remove</th>
   </thead>
   <tbody>
-    <% @appointments.each do |appointment| %>
+    <% @appointments.each do |appt| %>
       <tr>
-        <td><%= link_to appointment.post.patient.name, class: "ui basic button"%></td>
-        <td><%= appointment.post.symptom %></td>
-        <td><%= appointment.post.age %></td>
-        <td><%= appointment.post.dob %></td>
-        <td><%= appointment.post.sex %></td>
-        <td><%= appointment.post.phone %></td>
-        <td><%= appointment.post.remark %></td>
-        <td><%= link_to 'Appointment', appointment_doctors_path(appointment.id) %></td>
+        <td><%= link_to appt.post.patient.name, class: "ui basic button"%></td>
+        <td><%= appt.post.symptom %></td>
+        <td><%= appt.post.age %></td>
+        <td><%= appt.post.dob %></td>
+        <td><%= appt.post.strftime('%a, %b %d, %Y') %></td>
+        <td><%= appt.time.strftime("%l:%M %p")  %></td>
+        <td><%= button_to 'Cancel', appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
       </tr>
     <% end %>
   </tbody>

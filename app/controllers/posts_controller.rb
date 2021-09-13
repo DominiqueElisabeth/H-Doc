@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @appointment = current_doctor.appointments.find_by(post_id: @post.id)
+    @appointments = @post.appointments.order("date", "time")
   end
 
   # GET /posts/new
@@ -65,6 +65,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:symptom, :age, :dob, :weight, :phone, :sex, :remark)
+      params.require(:post).permit(:symptom, :age, :dob, :weight, :phone, :sex, :remark, :patient_id)
     end
 end

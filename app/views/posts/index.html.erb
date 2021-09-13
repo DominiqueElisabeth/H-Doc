@@ -20,7 +20,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= link_to post.patient.name, class: "ui basic button" %></td>
+        <td><%= link_to post.patient.name, post_path(post), class: "ui basic button" %></td>
         <td><%= post.symptom %></td>
         <td><%= post.age %></td>
         <td><%= post.dob.strftime('%m/%d/%Y') %></td>
