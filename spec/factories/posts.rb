@@ -1,12 +1,16 @@
 FactoryBot.define do
   factory :post do
-    symptom { "MyText" }
-    age { 1 }
-    dob { "2021-09-07" }
-    weight { 1 }
-    phone { "MyString" }
-    sex { "MyString" }
-    remark { "MyText" }
-    patient { nil }
-  end
-end
+    symptom { 'symptom' }
+       comment { '' }
+     end
+     factory :second_post, class: 'post' do
+       symptom { '' }
+       remark { 'remark' }
+     end
+     factory :third_post, class: 'Post' do
+       symptom { '' }
+       remark { 'remark' }
+    
+     association :patient
+   end
+   end
