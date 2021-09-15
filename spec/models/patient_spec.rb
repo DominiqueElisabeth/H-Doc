@@ -35,7 +35,7 @@ RSpec.describe Patient, type: :model do
 				expect(patient).not_to be_valid
 			end
 	    end
-	    context 'If the User Name and email are present; password is at least 6 characters and matches with password_confirmation' do
+	    context 'If the patient and email are present; password is at least 6 characters and matches with password_confirmation' do
 			it 'Validation passes' do
 				patient = Patient.new(name: 'no', email: "test@ex.com", password: "123456", password_confirmation: "123456")
 				expect(patient).to be_valid
