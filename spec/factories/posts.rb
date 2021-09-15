@@ -6,10 +6,9 @@ FactoryBot.define do
     weight { 1 }
     phone { "MyString" }
     sex { "MyString" }
-    remark { "MyText" }
     remark { '' }
      end
-     factory :second_post, class: 'post' do
+     factory :post2, class: 'post' do
        symptom { '' }
        age { 1 }
        dob { "2021-09-07" }
@@ -18,7 +17,7 @@ FactoryBot.define do
        sex { "MyString" }
        remark { '' }
      end
-     factory :third_post, class: 'Post' do
+     factory :post3, class: 'Post' do
        symptom { 'symptom' }
        age { 1 }
        dob { "2021-09-07" }
