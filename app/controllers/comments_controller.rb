@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
    before_action :set_post
-   before_action :authenticate_doctor!
+   before_action :admin_required
 
    def index
      @comments = @post.comments.order("created_at")

@@ -3,6 +3,7 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:edit, :update, :destroy]
 
   def index
+    @doctors = Doctor.all
     @doctor = Doctor.order(created_at: :asc).page(params[:page]).per(8)
   end
 

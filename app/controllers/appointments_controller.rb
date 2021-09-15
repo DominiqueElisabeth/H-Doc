@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :set_doctor
   before_action :set_posts, only: [:new, :create]
-  before_action :require_admin
+  before_action :admin_required
 
   def index
      @appointments = @doctor.appointments.order(:date, :time)
