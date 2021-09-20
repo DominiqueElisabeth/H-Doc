@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   # helper_method :current_patient
 
   def admin_required
-    redirect_to appointments_path unless doctor_signed_in? && current_doctor.admin?
+    redirect_to posts_path unless doctor_signed_in? && current_doctor.admin?
   end
 
   def doctor_required
-    redirect_to appointments_path unless doctor_signed_in?
+    redirect_to posts_path unless doctor_signed_in?
   end
 
   def patient_required

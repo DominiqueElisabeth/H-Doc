@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h1>Add Post</h1>
+  <h1>Edit post</h1>
   <hr />
   <%= form_with(model: @post, local: true, class: "ui form") do |form| %>
 
@@ -20,7 +20,7 @@
 
 <div class="field">
   <%= form.label :phone %>
-  <%= form.text_field :phone, placeholder: "Phone" %>
+  <%= form.text_field :phone %>
 </div>
 
 <div class="field">

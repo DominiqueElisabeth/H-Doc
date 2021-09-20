@@ -1,4 +1,4 @@
-<span class="doctor-show-header"><h1><%= @patient %>Healthcare Post List</h1></span>
+<span class="doctor-show-header"><h1>Patient Healthcare Post List</h1></span>
 
 <br />
 <br />
@@ -14,6 +14,7 @@
     <th class="center aligned">Weight</th>
     <th class="center aligned">Phone</th>
     <th class="center aligned">Remark</th>
+    <th class="center aligned">Edit</th>
     <th class="center aligned">Remove</th>
   </thead>
 
@@ -28,7 +29,10 @@
         <td><%= post.weight %></td>
         <td><%= post.phone %></td>
         <td><%= post.remark %></td>
+        <% if current_patient == post.patient %>
+        <td><%= link_to 'Edit', edit_post_path(post), class:"ui button red inverted" %></td>
         <td><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class:"ui button red inverted" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

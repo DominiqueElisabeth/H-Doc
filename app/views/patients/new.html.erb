@@ -4,12 +4,12 @@
 <%= image_tag("logo.png", :alt => "HelloDoc Logo") %>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, placeholder: "Name", autofocus: true, autocomplete: "name" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, placeholder: "Password", autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>

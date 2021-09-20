@@ -6,14 +6,13 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module MedicalPassApp2
+module HiDoc
   class Application < Rails::Application
     config.load_defaults 5.2
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
-  
-
-    config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = %i[de en]
 
     config.generators do |g|
       g.assets false

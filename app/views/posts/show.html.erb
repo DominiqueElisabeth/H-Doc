@@ -1,5 +1,6 @@
 <h1><%= @post.patient.name%></h1>
-<h2 class="ui center aligned blue header">Patient Information</h2>
+
+<h2 class="ui center aligned blue header">Information</h2>
 <table class="ui definition table user-info selectable">
   <tr>
       <td>Name:</td>
@@ -39,7 +40,7 @@
 <br />
 
 <h2 class="ui center aligned blue header"><%= @post.patient.name%> <%= @post.patient.name[-1] == 's' ? "'  Scheduled Appointments" : "\'s Scheduled Appointments"%></h2>
-<%= link_to 'Add Appointment', new_appointment_path, class:"ui button blue inverted"%>
+
     <table class="ui table striped selectable">
         <thead>
             <tr>
@@ -55,7 +56,9 @@
                     <td><%= link_to appt.doctor.name, doctor_appointments_path(appt.doctor),class:"ui button basic" %></td>
                     <td><%= appt.date.strftime('%a, %b %d, %Y') %></td>
                     <td><%= appt.time.strftime("%l:%M %p") %></td>
+                    <% if current_doctor == appt.doctor %>
                     <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+                 <% end %>
                 </tr>
             <% end %>
         </tbody>
@@ -77,17 +80,20 @@
                 <%= comment.created_at.in_time_zone("Asia/Tokyo").strftime("%l:%M %p") %>
             </div>
             <div class="note-actions">
+              <% if current_doctor == comment.doctor %>
                 <%= link_to edit_post_comment_path(comment.post_id, comment), :edit => 'go' do %>
                     <i class="edit outline icon"></i>
                 <% end %>
                 <%= button_to post_comment_path(comment.post, comment), method: :delete do %>
                     <i class="trash alternate icon trash"></i>
                 <% end %>
+                <% end %>
 
             </div>
 
         </div>
     <% end %>
+
     <%= link_to "Add Result", new_post_comment_path(@post), class:"ui button blue" %>
 
 </div>

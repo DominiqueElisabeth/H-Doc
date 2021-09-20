@@ -1,9 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :patient_required, only: %i[new edit update]
+
+
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :asc)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -19,12 +22,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    unless current_patient == @post.patient
+      redirect_back fallback_location: posts_path, notice: 'User is not owner'
+    end
   end
 
   # POST /posts or /posts.json
   def create
-      @post = Post.new(post_params)
-      @post.patient_id = current_patient.id
+      @post = current_patient.posts.build(post_params)
           if @post.save
             age = Date.today.year - @post.dob.year
             @post.update(age: age)
