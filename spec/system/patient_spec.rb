@@ -1,118 +1,73 @@
 require 'rails_helper'
 RSpec.describe 'Patient management function', type: :system do
 
-  describe 'Patient creation function' do
+  describe 'Patient user registration test' do
     context 'When creating a new patient' do
-      it 'Account  is registered and  page is displayed'  do
-      visit root_path
-      click_on 'Sign Up'
-        fill_in 'name', with: 'patient1'
-        fill_in 'email', with: 'patient@gmail.com'
-        fill_in 'password', with: '123456'
-        fill_in 'password_confirmation', with: '123456'
-        click_button "Sign up"
-        expect(page).to have_content 'My page'
+      it 'cannot be created without reCAPTCHA' do
+
+        visit new_patient_registration_path
+        fill_in :name,                  with: "patient"
+        fill_in :email,                 with: "test@ex.com"
+        fill_in :password,              with: "123456"
+        fill_in :password_confirmation, with: "123456"
+        click_button "Sign Up"
+        expect(page).to have_content "Sign up"
       end
     end
   end
 
-    describe'login  function'  do
-    context'If  you enter the required information on the login page and press the login button'  do
-      it 'Your page is displayed'  do
-        visit root_path
-        click_on 'Sign Up'
-          fill_in 'name', with: 'patient1'
-          fill_in 'email', with: 'patient@gmail.com'
-          fill_in 'password', with: '123456'
-          fill_in 'password_confirmation', with: '123456'
-          click_button "Sign up"
-          click_link 'logout'
-          visit root_path
-          click_on 'Login'
-          fill_in 'email', with: 'patient@gmail.com'
-          fill_in 'password', with: '123456'
-          click_on 'Login'
-          expect(page).to have_content 'My page'
-        end
+  describe 'Sign in' do
+    before do
+      fill_in :name,     with: @patient.name
+      fill_in :password, with: @patient.password
+      click_button "Sign in"
+    end
+    context 'Sign in' do
+      it 'You signed in' do
+        expect(page).to have_content "Sign in"
       end
     end
+    context 'When you logged in' do
+      it 'Transfert to your page' do
 
-    describe 'logout  function'  do
-      context 'if  you press the logout link in the header'  do
-        it 'Log  out and return to the top page'  do
-          visit root_path
-          click_on 'Sign Up'
-          fill_in 'name', with: 'patient1'
-          fill_in 'email', with: 'patient@gmail.com'
-          fill_in 'password', with: '123456'
-          fill_in 'password_confirmation', with: '123456'
-          click_button "Sign up"
-          fill_in 'email', with: 'patient@gmail.com'
-          fill_in 'password', with: '123456'
-          click_on 'Login'
-          click_link  'logout'
-          expect(page).to have_content 'Logged  out'
-        end
+        expect(page).to have_content "patient1"
+        expect(current_path).to have_content "/patients/#{patient1.id}"
       end
     end
+    context 'Patient edit screen' do
+      it 'Patient can edit his details' do
+        click_link 'Edit your account'
 
-      describe 'Profile  editing function'  do
-    context 'When  you enter the account information on the user edit screen and press the update button'  do
-      it 'Account  information is updated and community list page is displayed'  do
-        visit root_path
-        click_on 'Sign Up'
-        fill_in 'name', with: 'patient2'
-        fill_in 'email', with: 'patient2@gmail.com'
-        fill_in 'password', with: '123456'
-        fill_in 'password_confirmation', with: '123456'
+        fill_in :name,     with: "patient1"
+        fill_in :email,     with: "test@gmail.com"
+        fill_in :password,     with: "111111"
+        fill_in :password_confirmation,     with: "111111"
+        fill_in :current_password,     with: "password"
         click_button "Sign up"
-        click_on 'My  Page'
-        click_on 'Edit  profile'
-        fill_in 'name', with: 'patient2'
-        fill_in 'email', with: 'patient2@gmail.com'
-        fill_in 'password', with: '123456'
-        fill_in 'password_confirmation', with: '123456'
-        click_on 'update'
-        expect(page).to have_content 'Your  account information has changed.'
+        expect(page).to have_content "Account information changed."
       end
     end
-  end
-  describe 'account  deletion function'  do
-  context 'When  you press the delete account button in the profile edit screen'  do
-    it 'Account  is deleted and returns to top page'  do
-      visit root_path
-      fill_in 'name', with: 'patient2'
-      fill_in 'email', with: 'patient2@gmail.com'
-      fill_in 'password', with: '123456'
-      fill_in 'password_confirmation', with: '123456'
-      click_button 'Sign up'
-      click_on 'My  Page'
-      click_on 'Edit  profile'
-      click_button 'cancel my account'
-      page.driver.browser.switch_to.alert.accept
-      expect(page).to have_content 'Your  account has been deleted. We look forward to seeing you again. '
+    context 'If the edit is empty' do
+      it 'Editing fails and does not transition' do
+        click_link 'Account edit'
+        expect(current_path).to have_content "/patients/edit.#{patient1.id}"
+        click_button "Update"
+        expect(page).to have_content "Patient information was not saved due to an error."
+      end
+    end
+    context 'Delete account' do
+      it 'Transfer to login screen' do
+        click_link 'Edit your account'
+        click_on 'Cancel my account'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content "I deleted my account. We look forward to seeing you again."
+      end
+    end
+    context 'Logout' do
+      it 'Transfer to login screen' do
+        click_on "Sign out"
+        expect(page).to have_content "Logged out"
+      end
     end
   end
 end
-  describe 'Guest  login function'  do
-      context 'When  you press the guest login button'  do
-        it 'Transition to my page'  do
-          visit root_path
-          click_link 'login as a patient'
-          expect(page).to have_content 'You have  logged in. '
-          expect(page).to have_content 'guest'
-        end
-      end
-    end
-
-    describe 'Guest  administrator login function'  do
-      context 'When  you press the guest login button'  do
-        it 'Transition to post page' do
-          visit root_path
-          click_link 'Login as an administrator '
-          expect(page).to have_content 'You have  logged in. '
-          expect(page).to have_content 'administrator'
-        end
-      end
-    end
-  end
