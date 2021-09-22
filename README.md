@@ -17,14 +17,14 @@ Ajax
 ```
 ### Technology outside the curriculum
 ```
-reCAPTCHA
+reCAPTCHA for patients signing up
 ```
 ### Execution Procedure
 
 #### Installation Steps
 
 1. Clone repo: `git clone git@github.com:DominiqueElisabeth/Hello_Doctor.git`
-2. Change into directory: `cd HelloDoc`
+2. Change into directory: `cd Hello_Doctor`
 3. Install gems: `bundle install`
 4. Install JavaScript packages: `yarn install`
 5. Create database: `rails db:create`
