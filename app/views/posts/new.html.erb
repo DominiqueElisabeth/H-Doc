@@ -10,7 +10,7 @@
 
 <div class="field">
   <%= form.label :dob %>
-  <%= form.date_field :dob, required: true, placeholder: "D.O.B." %>
+  <%= form.date_field :dob, required: true, placeholder: "D.O.B.", max: Date.today  %>
 </div>
 
 <div class="field">

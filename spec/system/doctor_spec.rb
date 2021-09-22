@@ -69,7 +69,7 @@ RSpec.describe 'Doctor management function', type: :system do
 
           click_button 'Edit'
 
-          expect(current_path).to have_content "/doctors/edit"
+          expect(current_path).to have_content "/doctors/edit.1"
           click_button "Update"
           expect(page).to have_content "Current password can't be blank"
         end
