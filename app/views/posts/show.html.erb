@@ -1,5 +1,6 @@
 <h1><%= @post.patient.name%></h1>
 
+
 <h2 class="ui center aligned blue header">Information</h2>
 <table class="ui definition table user-info selectable">
   <tr>
@@ -58,6 +59,7 @@
                     <td><%= appt.time.strftime("%l:%M %p") %></td>
                     <% if current_doctor == appt.doctor %>
                     <td><%= button_to 'Cancel', doctor_appointment_path(appt.doctor_id, appt.id), method: :delete, class:"ui button red inverted" %></td>
+                    <button type="button" class="btn btn-outline-info mx-1"><%= link_to 'Add Result', new_post_comment_path(@post)%></button>
                  <% end %>
                 </tr>
             <% end %>
@@ -88,12 +90,7 @@
                     <i class="trash alternate icon trash"></i>
                 <% end %>
                 <% end %>
-
             </div>
-
         </div>
     <% end %>
-
-    <%= link_to "Add Result", new_post_comment_path(@post), class:"ui button blue" %>
-
 </div>

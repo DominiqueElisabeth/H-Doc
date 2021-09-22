@@ -1,16 +1,19 @@
 FactoryBot.define do
   factory :doctor do
-    name { "Doctor 1" }
+    name { "doctor" }
     password { "123456" }
+    password_confirmation { "123456" }
   end
   factory :doctor2, class: Doctor do
-   name { "Doctor 2" }
+   name { "doctor2" }
    password { "123456" }
+   password_confirmation { "123456" }
 
  end
- factory :admin, class: Doctor do
+ factory :admin_doctor, class: Doctor do
     name { "admin" }
     password { "123456" }
+    password_confirmation { "123456" }
     admin { true }
   end
 end

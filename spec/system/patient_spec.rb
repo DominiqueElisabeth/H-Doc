@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe 'Patient management function', type: :system do
 
   describe 'Patient user registration test' do
@@ -6,11 +7,11 @@ RSpec.describe 'Patient management function', type: :system do
       it 'cannot be created without reCAPTCHA' do
 
         visit new_patient_registration_path
-        fill_in :name,                  with: "patient"
-        fill_in :email,                 with: "test@ex.com"
-        fill_in :password,              with: "123456"
-        fill_in :password_confirmation, with: "123456"
-        click_button "Sign Up"
+        fill_in :Name,                  with: "patient"
+        fill_in :Email,                 with: "test@ex.com"
+        fill_in :Password,              with: "123456"
+
+        click_button "Sign up"
         expect(page).to have_content "Sign up"
       end
     end
@@ -18,9 +19,20 @@ RSpec.describe 'Patient management function', type: :system do
 
   describe 'Sign in' do
     before do
-      fill_in :name,     with: @patient.name
-      fill_in :password, with: @patient.password
+      visit new_patient_registration_path
+      fill_in 'patient_name', with: 'patient1'
+      fill_in 'patient_email', with: 'patient1@example.com'
+      fill_in 'patient_password', with: '123456'
+      fill_in 'patient_password_confirmation', with: '123456'
+
+      click_button "Sign up"
+
+      visit new_patient_session_path
+
+      fill_in :Name, with: "patient1"
+      fill_in :Password, with: "123456"
       click_button "Sign in"
+
     end
     context 'Sign in' do
       it 'You signed in' do
@@ -29,44 +41,62 @@ RSpec.describe 'Patient management function', type: :system do
     end
     context 'When you logged in' do
       it 'Transfert to your page' do
-
-        expect(page).to have_content "patient1"
-        expect(current_path).to have_content "/patients/#{patient1.id}"
+        visit root_path
+        click_button "Login as a patient"
+        expect(page).to have_content "patient"
+        expect(page).to have_content "You have logged in as a patient"
       end
     end
     context 'Patient edit screen' do
       it 'Patient can edit his details' do
+
+        visit root_path
+        click_button "Login as a patient"
+        click_link "My page"
         click_link 'Edit your account'
 
-        fill_in :name,     with: "patient1"
-        fill_in :email,     with: "test@gmail.com"
-        fill_in :password,     with: "111111"
-        fill_in :password_confirmation,     with: "111111"
-        fill_in :current_password,     with: "password"
-        click_button "Sign up"
-        expect(page).to have_content "Account information changed."
+        patient = Patient.find_by(id:1)
+
+        fill_in :patient_name,     with: "patient1"
+        fill_in :patient_email,     with: "test@gmail.com"
+        fill_in :patient_password,     with: "111111"
+        fill_in :patient_password_confirmation,     with: "111111"
+        fill_in :patient_current_password,     with: SecureRandom.urlsafe_base64
+        click_button "Update"
+        expect(page).to have_content "Current password is invalid"
       end
     end
     context 'If the edit is empty' do
       it 'Editing fails and does not transition' do
-        click_link 'Account edit'
-        expect(current_path).to have_content "/patients/edit.#{patient1.id}"
+        visit root_path
+        click_button "Login as a patient"
+        click_link "My page"
+
+        click_link 'Edit your account'
+
+        expect(current_path).to have_content "/patients/edit.1"
         click_button "Update"
-        expect(page).to have_content "Patient information was not saved due to an error."
+        expect(page).to have_content "Current password can't be blank"
       end
     end
     context 'Delete account' do
       it 'Transfer to login screen' do
+        visit root_path
+        click_button "Login as a patient"
+        click_link "My page"
+
         click_link 'Edit your account'
-        click_on 'Cancel my account'
+        click_on 'cancel my account'
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content "I deleted my account. We look forward to seeing you again."
+        expect(page).to have_content "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       end
     end
     context 'Logout' do
       it 'Transfer to login screen' do
+        visit root_path
+        click_button "Login as a patient"
         click_on "Sign out"
-        expect(page).to have_content "Logged out"
+        expect(page).to have_content "Signed out successfully."
       end
     end
   end

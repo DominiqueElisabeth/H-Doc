@@ -6,7 +6,7 @@ class Patient < ApplicationRecord
         #  :omniauthable, omniauth_providers: [:google_oauth2]
         #  :trackable
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :appointments
   has_many :doctors, through: :appointments
 

@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_082000) do
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_patients_on_confirmation_token", unique: true
     t.index ["email"], name: "index_patients_on_email", unique: true
-    t.index ["name"], name: "index_patients_on_name", unique: true
     t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_patients_on_unlock_token", unique: true
   end

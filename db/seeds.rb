@@ -9,16 +9,16 @@
 10.times do |index|
         Doctor.create!(
                	    name: "name",
-               	    email: "email",
                	    password: "password",
                	    admin: false,
                	)
-               end
+               
                Doctor.create!(
-                   name: "admin",
+                   name: "admin_doctor",
                    password: "password",
                    admin: true,
                )
+             end
 
 
 10.times do |index|
@@ -30,7 +30,6 @@
 
 10.times do |index|
         Post.create!(
-              title: Faker::Lorem.words,
               symptom: Faker::Lorem.sentence,
               remarks:  Faker::Lorem.sentence,
               date: DateTime.now.to_date,

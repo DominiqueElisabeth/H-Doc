@@ -7,6 +7,7 @@ FactoryBot.define do
     phone { "MyString" }
     sex { "MyString" }
     remark { '' }
+    association :patient
      end
      factory :post2, class: 'post' do
        symptom { '' }
@@ -16,6 +17,7 @@ FactoryBot.define do
        phone { "MyString" }
        sex { "MyString" }
        remark { '' }
+         association :patient
      end
      factory :post3, class: 'Post' do
        symptom { 'symptom' }

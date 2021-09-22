@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Patient, type: :model do
+RSpec.describe 'Patient model function', type: :model do
 
   describe 'Validation test' do
 		context 'If the Patient name is empty' do
