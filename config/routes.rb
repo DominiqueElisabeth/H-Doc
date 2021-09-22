@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     passwords:     'doctors/passwords',
     registrations: 'doctors/registrations'
   }
-  
+
   resources :doctors do
    resources :appointments, only: [:index,:new, :create, :destroy]
  end

@@ -17,5 +17,7 @@
   </h4>
 </ul>
 
-<button type="button" class="btn btn-primary btn-sm"><%= link_to 'Login as a patient', tops_guest_sign_in_path, method: :post %></button>
-<button type="button" class="btn btn-secondary btn-sm"><%= link_to 'Login as an admin', tops_guest_admin_sign_in_path, method: :post %></button>
+<% if !current_patient && !current_doctor %>
+ <button type="button" class="btn btn-primary btn-sm"><%= link_to 'Login as a patient', tops_guest_sign_in_path, method: :post %></button>
+ <button type="button" class="btn btn-secondary btn-sm"><%= link_to 'Login as an admin', tops_guest_admin_sign_in_path, method: :post %></button>
+<% end %>
